@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# Prácticas de React y Redux
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicación de ejercicios para practicar la construcción de interfaces con React y la gestión de estado global con Redux. El proyecto reúne ejemplos pequeños e independientes —contador, perfil, frutas, tareas y publicaciones— dentro de una misma aplicación.
 
-## Available Scripts
+## Stack y herramientas
 
-In the project directory, you can run:
+- **JavaScript** y **JSX** para la lógica y la interfaz.
+- **React 18** para construir la aplicación con componentes funcionales.
+- **Redux 5** para mantener el estado global, organizarlo con reducers y actualizarlo mediante acciones.
+- **React Redux** para conectar los componentes al store con `Provider` y `connect`.
+- **Redux Thunk** para despachar operaciones asíncronas, como un contador con demora y la carga de publicaciones.
+- **Redux Logger** y **Redux DevTools Extension** para observar las acciones y el estado durante el desarrollo.
+- **Create React App** (`react-scripts`) como entorno de desarrollo y herramienta de build.
+- **react-spinners** para mostrar un indicador mientras se cargan publicaciones.
+- **JSONPlaceholder** como API pública de prueba para obtener publicaciones.
 
-### `npm start`
+El proyecto también declara otras dependencias en `package.json`; no todas forman parte de las funcionalidades implementadas actualmente.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Funcionalidades y conceptos practicados
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Estado global y componentes
 
-### `npm test`
+`src/redux/store.js` crea el store y aplica middleware. `src/redux/reducers/index.js` combina los reducers de contador, usuario, frutas, tareas y publicaciones. La aplicación entrega el store a sus componentes mediante `Provider`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Los componentes leen los datos del estado global y despachan acciones usando `connect`, `mapStateToProps` y `mapDispatchToProps`. Los reducers devuelven un estado nuevo al procesar acciones; en los ejemplos se utilizan actualizaciones inmutables con spread, `map` y `filter`.
 
-### `npm run build`
+### Ejercicios de la interfaz
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Contador:** incrementa y decrementa el valor mediante acciones síncronas; también incluye un incremento asíncrono con una demora configurable.
+- **Perfil:** muestra el nombre y el país iniciales, y permite actualizar el nombre desde un campo de texto.
+- **Frutas:** permite agregar elementos a una lista almacenada en Redux.
+- **Tareas (todos):** permite crear tareas, marcar y desmarcar su estado y eliminarlas. Cada tarea tiene un identificador y una propiedad `checked`.
+- **Publicaciones (blog):** solicita publicaciones a JSONPlaceholder, muestra un indicador de carga y presenta los títulos recibidos.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Estructura del proyecto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```text
+src/
+├── App.js                    # Composición de la interfaz y Provider de Redux
+├── index.js                  # Punto de entrada de React
+├── utils.js                  # Utilidad para generar identificadores
+├── components/               # Vistas y componentes de cada ejercicio
+│   └── Todos/                # Formulario, lista e ítem de tarea
+└── redux/
+    ├── store.js              # Store y middleware
+    ├── actions/              # Creadores de acciones y thunk
+    └── reducers/             # Reducers por dominio y reducer raíz
+```
 
-### `npm run eject`
+## Requisitos
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Necesitas tener **Node.js** y **npm** instalados.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Instalación y ejecución
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Desde la raíz del repositorio:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm install
+npm start
+```
 
-## Learn More
+El servidor de desarrollo se abre en [http://localhost:3000](http://localhost:3000) y recarga la aplicación al guardar cambios.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Otros comandos
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm test       # Ejecuta el entorno de pruebas de Create React App
+npm run build  # Genera la versión optimizada en build/
+```
